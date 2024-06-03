@@ -2,6 +2,7 @@ package com.mygdx.breaker;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import java.sql.SQLException;
 import java.util.Random;
 
 public class Ball extends Coordinates {
@@ -75,12 +76,14 @@ public class Ball extends Coordinates {
           ((ballLeftBound - xSpeed) > brickRightBound)) {
         xSpeed = -xSpeed;
         brick.destroyed = true;
+        score += 1;
       }
       // Collision on left side
       else if ((ballRightBound > brickLeftBound) &&
                (ballRightBound - xSpeed) < brickLeftBound) {
         xSpeed = -xSpeed;
         brick.destroyed = true;
+        score += 1;
       }
 
       // Collision on top/bottom
@@ -88,6 +91,7 @@ public class Ball extends Coordinates {
                (ballLeftBound < brickRightBound)) {
         ySpeed = -ySpeed;
         brick.destroyed = true;
+        score += 1;
       }
     }
   }

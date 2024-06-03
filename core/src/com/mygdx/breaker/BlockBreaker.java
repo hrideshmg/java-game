@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import java.util.ArrayList;
+import java.sql.*;
 
 public class BlockBreaker extends ApplicationAdapter {
   ShapeRenderer shape;
   Ball ball;
   Player paddle;
+  String name="johnEldenring";
   static final int speed = 7;
   static final int initSize = 15;
   static final float speedFactor = 0.02f;
@@ -17,9 +19,19 @@ public class BlockBreaker extends ApplicationAdapter {
   static final int brickPadding = 10;
   public GameOver gameOver;
   ArrayList<Brick> bricks = new ArrayList<Brick>();
+  Connection connection;
 
   @Override
   public void create() {
+    connection=null;
+    try{
+      Class.forName("com.mysql.cj.jdbc.Driver");
+			connection = DriverManager.getConnection(
+				"jdbc:mysql://localhost:3306/ball_souls",
+				"hridesh", "Nuclear123@");
+    }catch(Exception e){
+      System.out.println(e);
+    }
     shape = new ShapeRenderer();
     ball = new Ball(50, 200, speed, initSize, speedFactor, this);
     paddle = new Player(50, 50, 100);
@@ -59,6 +71,15 @@ public class BlockBreaker extends ApplicationAdapter {
       if (brick.destroyed) {
         bricks.remove(brick);
       }
+    }
+  }
+  @Override
+  public void dispose(){
+    try {
+      connection.close();
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
   }
 }
