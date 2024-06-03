@@ -2,10 +2,13 @@ package com.mygdx.breaker;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
+import java.sql.SQLException;
 import java.util.Random;
 
 class Ball {
   int x, y, speed, ballSize, xSpeed, ySpeed;
+  public int score=0;
   float speedFactor;
   Color color = Color.WHITE;
   BlockBreaker game;
@@ -75,12 +78,14 @@ class Ball {
           ((ballLeftBound - xSpeed) > brickRightBound)) {
         xSpeed = -xSpeed;
         brick.destroyed = true;
+        score+=1;
       }
       // Collision on left side
       else if ((ballRightBound > brickLeftBound) &&
                (ballRightBound - xSpeed) < brickLeftBound) {
         xSpeed = -xSpeed;
         brick.destroyed = true;
+        score+=1;
       }
 
       // Collision on top/bottom
@@ -88,6 +93,7 @@ class Ball {
                (ballLeftBound < brickRightBound)) {
         ySpeed = -ySpeed;
         brick.destroyed = true;
+        score+=1;
       }
     }
   }
@@ -104,7 +110,7 @@ class Ball {
       ySpeed = -ySpeed;
     }
     if (y < 0 - ballSize) {
-      game.gameOver.endGame();
+        game.gameOver.endGame();
     }
     checkPlayerCollision(paddle);
   }
