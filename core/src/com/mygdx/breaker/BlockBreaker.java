@@ -1,5 +1,4 @@
 package com.mygdx.breaker;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -16,17 +15,21 @@ public class BlockBreaker extends ApplicationAdapter {
   static final int brickHeight = 50;
   static final int brickWidth = 90;
   static final int brickPadding = 10;
+  public GameOver gameOver;
   ArrayList<Brick> bricks = new ArrayList<Brick>();
 
   @Override
   public void create() {
     shape = new ShapeRenderer();
-    ball = new Ball(50, 200, speed, initSize, speedFactor);
+    ball = new Ball(50, 200, speed, initSize, speedFactor, this);
     paddle = new Player(50, 50, 100);
+    gameOver = new GameOver(this);
+    generateBricks();
+  }
 
+  public void generateBricks() {
     int screenHeight = Gdx.graphics.getHeight();
     int screenWidth = Gdx.graphics.getWidth();
-
     for (int y = screenHeight / 2; y < screenHeight - brickHeight * 2;
          y += brickHeight + brickPadding) {
       for (int x = brickWidth; x < screenWidth - brickWidth;
@@ -38,6 +41,10 @@ public class BlockBreaker extends ApplicationAdapter {
 
   @Override
   public void render() {
+    if (gameOver.isGameOver) {
+      gameOver.showEndGameScreen();
+      return;
+    }
     ScreenUtils.clear(0, 0, 0, 0);
     ball.update(paddle);
     paddle.update();
