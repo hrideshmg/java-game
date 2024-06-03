@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import java.util.Random;
 
-class Ball {
-  int x, y, speed, ballSize, xSpeed, ySpeed;
+public class Ball extends Coordinates {
+  int speed, ballSize, xSpeed, ySpeed;
   float speedFactor;
   Color color = Color.WHITE;
   BlockBreaker game;
@@ -122,7 +122,7 @@ class Ball {
     this.x = random.nextInt(padding, Gdx.graphics.getWidth() - padding);
     this.y = random.nextInt(padding, Gdx.graphics.getHeight() / 2 - padding);
     this.xSpeed = random.nextBoolean() ? speed : -speed;
-    this.ySpeed = random.nextBoolean() ? speed : -speed;
+    this.ySpeed = speed;
     game.bricks.clear();
     game.generateBricks();
   }

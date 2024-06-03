@@ -16,7 +16,7 @@ public class GameOver {
   private Stage stage;
   private Table table;
   public boolean isGameOver;
-  BlockBreaker game;
+  private BlockBreaker game;
 
   public GameOver(BlockBreaker game) {
     this.game = game;

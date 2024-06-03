@@ -2,8 +2,8 @@ package com.mygdx.breaker;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class Player {
-  int x, y, paddleHeight, paddleWidth;
+public class Player extends Coordinates {
+  int paddleHeight, paddleWidth;
 
   public Player(int x, int y, int paddleSize) {
     this.x = x;
