@@ -76,14 +76,14 @@ public class Ball extends Coordinates {
           ((ballLeftBound - xSpeed) > brickRightBound)) {
         xSpeed = -xSpeed;
         brick.destroyed = true;
-        score += 1;
+        game.setScore(game.getScore() + 1);
       }
       // Collision on left side
       else if ((ballRightBound > brickLeftBound) &&
                (ballRightBound - xSpeed) < brickLeftBound) {
         xSpeed = -xSpeed;
         brick.destroyed = true;
-        score += 1;
+        game.setScore(game.getScore() + 1);
       }
 
       // Collision on top/bottom
@@ -91,7 +91,7 @@ public class Ball extends Coordinates {
                (ballLeftBound < brickRightBound)) {
         ySpeed = -ySpeed;
         brick.destroyed = true;
-        score += 1;
+        game.setScore(game.getScore() + 1);
       }
     }
   }

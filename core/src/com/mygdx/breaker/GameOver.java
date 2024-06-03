@@ -12,11 +12,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
-public class GameOver {
+public class GameOver extends DbOperations {
   private Stage stage;
   private Table table;
   public boolean isGameOver;
-  private BlockBreaker game;
+  Label scoreLabel;
+  BlockBreaker game;
 
   public GameOver(BlockBreaker game) {
     this.game = game;
@@ -28,6 +29,7 @@ public class GameOver {
 
     Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
     Label gameOverLabel = new Label("GAME OVER", skin);
+    scoreLabel = new Label("", skin);
     TextButton restartGameButton = new TextButton("Restart", skin);
     restartGameButton.addListener(new ChangeListener() {
       public void changed(ChangeEvent event, Actor actor) { restartGame(); }
@@ -37,13 +39,22 @@ public class GameOver {
     table.setBackground(new TextureRegionDrawable(bg));
     table.add(gameOverLabel);
     table.row();
+    table.add(scoreLabel);
+    table.row();
     table.add(restartGameButton);
   }
 
-  public void endGame() { isGameOver = true; }
+  public void endGame() {
+    int score = game.getScore();
+    isGameOver = true;
+    scoreLabel.setText("Score: " + score);
+    updateHighScore(score, game.name, game.connection);
+  }
+
   public void showEndGameScreen() { stage.draw(); }
   public void restartGame() {
     isGameOver = false;
     game.ball.respawnBall();
+    game.setScore(0);
   }
 }

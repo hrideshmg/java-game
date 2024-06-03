@@ -3,14 +3,14 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import java.util.ArrayList;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class BlockBreaker extends ApplicationAdapter {
   ShapeRenderer shape;
   Ball ball;
   Player paddle;
-  String name="johnEldenring";
+  String name = "hridesh";
   static final int speed = 7;
   static final int initSize = 15;
   static final float speedFactor = 0.02f;
@@ -21,15 +21,18 @@ public class BlockBreaker extends ApplicationAdapter {
   ArrayList<Brick> bricks = new ArrayList<Brick>();
   Connection connection;
 
+  private int score = 0;
+  public void setScore(int score) { this.score = score; };
+  public int getScore() { return this.score; };
+
   @Override
   public void create() {
-    connection=null;
-    try{
+    connection = null;
+    try {
       Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection(
-				"jdbc:mysql://localhost:3306/ball_souls",
-				"hridesh", "Nuclear123@");
-    }catch(Exception e){
+      connection = DriverManager.getConnection(
+          "jdbc:mysql://localhost:3306/ball_souls", "hridesh", "robot123");
+    } catch (Exception e) {
       System.out.println(e);
     }
     shape = new ShapeRenderer();
@@ -74,7 +77,7 @@ public class BlockBreaker extends ApplicationAdapter {
     }
   }
   @Override
-  public void dispose(){
+  public void dispose() {
     try {
       connection.close();
     } catch (SQLException e) {
