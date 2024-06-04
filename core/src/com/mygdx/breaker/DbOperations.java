@@ -11,7 +11,7 @@ public class DbOperations {
       statement = connection.createStatement();
       resultSet = statement.executeQuery("SELECT * FROM gamers");
       return resultSet;
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
       return null;
     }
@@ -24,7 +24,7 @@ public class DbOperations {
       resultSet = statement.executeQuery("SELECT * FROM gamers WHERE name='" +
                                          name + "'");
       return resultSet;
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
       return null;
     }
@@ -42,7 +42,7 @@ public class DbOperations {
         }
       }
       statement.close();
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

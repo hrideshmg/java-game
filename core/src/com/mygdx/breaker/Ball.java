@@ -2,7 +2,6 @@ package com.mygdx.breaker;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import java.sql.SQLException;
 import java.util.Random;
 
 public class Ball extends Coordinates {
@@ -115,8 +114,8 @@ public class Ball extends Coordinates {
 
   public void draw(ShapeRenderer shape) {
     shape.begin(ShapeRenderer.ShapeType.Filled);
-    shape.circle(x, y, ballSize);
     shape.setColor(color);
+    shape.circle(x, y, ballSize);
     shape.end();
   }
 

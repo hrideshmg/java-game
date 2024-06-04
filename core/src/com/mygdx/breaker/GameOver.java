@@ -1,5 +1,4 @@
 package com.mygdx.breaker;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -16,8 +15,8 @@ public class GameOver extends DbOperations {
   private Stage stage;
   private Table table;
   public boolean isGameOver;
-  Label scoreLabel;
-  BlockBreaker game;
+  private Label scoreLabel;
+  private BlockBreaker game;
 
   public GameOver(BlockBreaker game) {
     this.game = game;
@@ -43,6 +42,8 @@ public class GameOver extends DbOperations {
     table.row();
     table.add(restartGameButton);
   }
+
+  public Stage getStage() { return stage; }
 
   public void endGame() {
     int score = game.getScore();

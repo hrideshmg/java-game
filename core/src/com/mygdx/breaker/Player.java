@@ -1,9 +1,11 @@
 package com.mygdx.breaker;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Player extends Coordinates {
   int paddleHeight, paddleWidth;
+  Color color = new Color(0.76f, 0.76f, 0.76f, 1f);
 
   public Player(int x, int y, int paddleSize) {
     this.x = x;
@@ -21,6 +23,7 @@ public class Player extends Coordinates {
 
   public void draw(ShapeRenderer shape) {
     shape.begin(ShapeRenderer.ShapeType.Filled);
+    shape.setColor(color);
     shape.rect(x, y, paddleWidth, paddleHeight);
     shape.end();
   }
