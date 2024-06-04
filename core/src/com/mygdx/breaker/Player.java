@@ -4,10 +4,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Player extends Coordinates {
-  int paddleHeight, paddleWidth;
+  float paddleHeight, paddleWidth;
   Color color = new Color(0.76f, 0.76f, 0.76f, 1f);
 
-  public Player(int x, int y, int paddleSize) {
+  public Player(float x, float y, int paddleSize) {
     this.x = x;
     this.y = y;
     this.paddleWidth = paddleSize * 5;

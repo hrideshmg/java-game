@@ -38,8 +38,7 @@ public class BlockBreaker
     try {
       Class.forName("com.mysql.cj.jdbc.Driver");
       connection = DriverManager.getConnection(
-          "jdbc:mysql://192.168.53.156:3306/ball_souls", "hridesh",
-          "Nuclear123@");
+          "jdbc:mysql://localhost:3306/ball_souls", "hridesh", "robot123");
     } catch (Exception e) {
       System.out.println(e);
     }
@@ -87,7 +86,6 @@ public class BlockBreaker
       gameOver.showEndGameScreen();
       return;
     }
-
     ScreenUtils.clear(0, 0, 0, 0);
     ball.update(paddle);
     paddle.update();
@@ -100,11 +98,17 @@ public class BlockBreaker
     for (int i = 0; i < bricks.size(); i++) {
       Brick brick = bricks.get(i);
       if (brick.destroyed) {
-        bricks.remove(brick);
+        float factor = 0.02f;
+        brick.width -= brick.width * factor;
+        brick.height -= brick.height * factor;
+        brick.x += (brick.width * factor) / 2;
+        brick.y += (brick.height * factor) / 2;
+        if (brick.height <= 5) {
+          bricks.remove(brick);
+        }
       }
     }
   }
-
   @Override
   public void dispose() {
     try {
@@ -113,6 +117,6 @@ public class BlockBreaker
       e.printStackTrace();
     }
     bricks.clear();
-    gameOver.getStage().dispose();
+    gameOver.dispose();
   }
 }

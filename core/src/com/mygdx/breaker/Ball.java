@@ -5,12 +5,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import java.util.Random;
 
 public class Ball extends Coordinates {
-  int speed, ballSize, xSpeed, ySpeed;
-  float speedFactor;
-  Color color = Color.WHITE;
+  int speed, xSpeed, ySpeed;
+  float speedFactor, ballSize;
+  Color color = new Color(0.76f, 0.76f, 0.76f, 1.0f);
   BlockBreaker game;
 
-  public Ball(int x, int y, int speed, int ballSize, float speedFactor,
+  public Ball(float x, float y, int speed, int ballSize, float speedFactor,
               BlockBreaker game) {
     this.x = x;
     this.y = y;
@@ -23,13 +23,13 @@ public class Ball extends Coordinates {
   }
 
   public void checkPlayerCollision(Player paddle) {
-    int ballLeftBound = this.x - this.ballSize;
-    int ballRightBound = this.x + this.ballSize;
-    int ballLowerBound = this.y - this.ballSize;
+    float ballLeftBound = this.x - this.ballSize;
+    float ballRightBound = this.x + this.ballSize;
+    float ballLowerBound = this.y - this.ballSize;
 
-    int paddleLeftBound = paddle.x;
-    int paddleRightBound = paddle.x + paddle.paddleWidth;
-    int paddleUpperBound = paddle.y + paddle.paddleHeight;
+    float paddleLeftBound = paddle.x;
+    float paddleRightBound = paddle.x + paddle.paddleWidth;
+    float paddleUpperBound = paddle.y + paddle.paddleHeight;
 
     if (ballLowerBound <= paddleUpperBound) {
       // Collision on right side
@@ -58,15 +58,17 @@ public class Ball extends Coordinates {
   }
 
   public void checkBrickCollision(Brick brick) {
-    int ballLeftBound = this.x - this.ballSize;
-    int ballRightBound = this.x + this.ballSize;
-    int ballLowerBound = this.y - this.ballSize;
-    int ballUpperBound = this.y + this.ballSize;
+    if (brick.destroyed)
+      return;
+    float ballLeftBound = this.x - this.ballSize;
+    float ballRightBound = this.x + this.ballSize;
+    float ballLowerBound = this.y - this.ballSize;
+    float ballUpperBound = this.y + this.ballSize;
 
-    int brickLeftBound = brick.x;
-    int brickRightBound = brick.x + brick.width;
-    int brickLowerBound = brick.y;
-    int brickUpperBound = brick.y + brick.width;
+    float brickLeftBound = brick.x;
+    float brickRightBound = brick.x + brick.width;
+    float brickLowerBound = brick.y;
+    float brickUpperBound = brick.y + brick.width;
 
     if ((ballUpperBound <= brickUpperBound) &&
         (ballLowerBound >= brickLowerBound)) {

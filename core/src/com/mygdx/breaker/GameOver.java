@@ -17,6 +17,7 @@ public class GameOver extends DbOperations {
   public boolean isGameOver;
   private Label scoreLabel;
   private BlockBreaker game;
+  private Texture bg;
 
   public GameOver(BlockBreaker game) {
     this.game = game;
@@ -33,7 +34,7 @@ public class GameOver extends DbOperations {
     restartGameButton.addListener(new ChangeListener() {
       public void changed(ChangeEvent event, Actor actor) { restartGame(); }
     });
-    Texture bg = new Texture(Gdx.files.internal("bg.png"));
+    bg = new Texture(Gdx.files.internal("bg.png"));
 
     table.setBackground(new TextureRegionDrawable(bg));
     table.add(gameOverLabel);
@@ -57,5 +58,10 @@ public class GameOver extends DbOperations {
     isGameOver = false;
     game.ball.respawnBall();
     game.setScore(0);
+  }
+
+  public void dispose() {
+    bg.dispose();
+    stage.dispose();
   }
 }
